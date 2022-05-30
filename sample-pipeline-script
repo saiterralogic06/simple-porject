@@ -1,0 +1,22 @@
+node {
+          stage('pulling code from github'){ 
+              git credentialsId: 'git', url: 'https://github.com/kotireddydevops/war-sampleproject.git'
+          }
+          
+          stage('build the code'){
+              sh 'mvn clean install'
+          }
+          
+          stage('moving wat to webapps'){
+             sh 'sudo cp -rf /var/lib/jenkins/workspace/sample-script/target/WebApp.war /opt/tomcat8/webapps/' 
+          }
+          
+          stage('stoping tomcat'){
+          sh '/opt/tomcat8/bin/shutdown.sh'
+          }
+          
+          stage('starting tomcat'){
+          sh '/opt/tomcat8/bin/startup.sh'
+          }
+     
+     }

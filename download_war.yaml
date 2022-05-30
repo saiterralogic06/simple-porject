@@ -1,0 +1,8 @@
+- hosts: k8s
+  tasks:
+  - name: remove files 
+    command: rm -rf /home/ec2-user/apache-tomcat-9.0.39/webapps/*
+  - name: Create a Deployment by reading the definition from a local file
+      copy: target/ROOT.war
+      dest: /home/ec2-user/apache-tomcat-9.0.39/webapps/ROOT.war
+      mode: 0777

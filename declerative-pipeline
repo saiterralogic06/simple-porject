@@ -1,0 +1,21 @@
+node {
+          stage('pulling code from github'){ 
+              git credentialsId: 'git', url: 'https://github.com/kotireddydevops/war-sampleproject.git'
+          }
+          
+          stage('build the code'){
+              sh 'mvn clean install'
+          }
+          
+          stage('removing war from webapps'){
+             sh 'sudo rm -rf /opt/tomcat9/webapps/WebApp.war' 
+          }
+          
+          stage('moving war to webapps'){
+             sh 'sudo cp -rf /var/lib/jenkins/workspace/my-first-job/target/WebApp.war /opt/tomcat9/webapps/' 
+          }
+          
+          stage('listing files  webapps'){
+             sh 'sudo ls -la /opt/tomcat9/webapps/' 
+          }
+    }
