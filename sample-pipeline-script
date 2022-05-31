@@ -17,6 +17,6 @@ node {
           
           stage('starting tomcat'){
           sh '/opt/tomcat8/bin/startup.sh'
-          
+          }
      }
      
